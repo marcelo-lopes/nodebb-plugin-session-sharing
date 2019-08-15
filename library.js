@@ -185,33 +185,7 @@ plugin.findUser = function(payload, callback) {
 								user.getUserFields(checks.uid, ['username', 'email', 'fullname'], next);
 							},
 							function (existingFields, next) {
-								var obj = {};
-
-								if (existingFields.username !== username) {
-									obj.username = username;
-								}
-
-								if (existingFields.email !== email) {
-									obj.email = email;
-								}
-
-								if (existingFields.fullname !== fullname) {
-									obj.fullname = fullname;
-								}
-
-								if (Object.keys(obj).length) {
-									obj.uid = checks.uid;
-									user.updateProfile(checks.uid, obj, function (err, userObj) {
-										if (err) {
-											winston.warn('[session-sharing] Unable to update profile information for uid: ' + checks.uid + '(' + err.message + ')');
-										}
-
-										// If it errors out, not that big of a deal, continue anyway.
-										next(null, userObj || existingFields);
-									});
-								} else {
-									setImmediate(next, null, {});
-								}
+								setImmediate(next, null, {});
 							},
 							function (userObj, next) {
 								if (picture) {
