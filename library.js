@@ -269,7 +269,7 @@ plugin.createUser = function(payload, callback) {
 	}
 
 	winston.info('[session-sharing] No user found, creating a new user for this login');
-	username = username.trim().replace(/[^'"\s\-.*0-9\u00BF-\u1FFF\u2C00-\uD7FF\w]+/, '-');
+	username = username.trim().replace(/[^'"\s\-.*0-9\u00BF-\u1FFF\u2C00-\uD7FF\w]+/g, '-');
 
 	user.create({
 		username: username,
